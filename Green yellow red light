@@ -1,0 +1,61 @@
+/*
+  
+  LED       Arduino Pin     
+  ----------      ------------     
+  l3                 4                
+  l2                   5                
+  l1                    6              
+  Upload the code directly to the Arduino UNO.
+*/
+
+
+
+
+
+int green=4;
+int yellow=5;
+int red=6;
+int i;
+void setup()
+{
+pinMode(green,OUTPUT);
+pinMode(yellow,OUTPUT);
+pinMode(red,OUTPUT);
+}
+void loop() {
+// put your main code here, to run repeatedly:
+changeLights();
+}
+void changeLights()
+{
+for(i=0;i<=300;i+=20)
+{
+if(i<=100)
+{
+digitalWrite(green,HIGH);
+delay(500);
+digitalWrite(green,LOW);
+delay(500);
+digitalWrite(yellow,LOW);
+digitalWrite(red,LOW);
+}
+else if(i>100 && i<200)
+{
+digitalWrite(green,LOW);
+digitalWrite(yellow,HIGH);
+delay(500);
+digitalWrite(yellow,LOW);
+delay(500);
+digitalWrite(red,LOW);
+}
+else
+{
+digitalWrite(green,LOW);
+digitalWrite(yellow,LOW);
+digitalWrite(red,HIGH);
+delay(500);
+digitalWrite(red,LOW);
+delay(500);
+}
+}
+}
