@@ -1,0 +1,25 @@
+/*
+3v3----->5v;
+lm35----> A0;
+GND----->GND;
+*/
+
+
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  Serial.println("Smart logic tech");
+  Serial.println("Temp Sensor (LM35) interface");
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  int err;
+  float temp;
+  temp = (5.00 * analogRead(A4) * 100) / 1024.0;
+  Serial.print("Current temp is: ");
+  Serial.print(temp);
+  Serial.println();
+  delay(1000);
+}
