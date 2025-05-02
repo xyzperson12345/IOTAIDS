@@ -1,0 +1,46 @@
+*
+5V------->5v;
+tri------->9(digital pin)
+ech0------>10(digital pin)
+l1--------3(digital pin)
+*/
+
+
+
+
+const int trigPin = 9;
+const int echoPin = 10;
+// Define LED pin
+const int ledPin = 3;
+// Variables for measuring distance
+long duration;
+int distance;
+void setup() {
+pinMode(trigPin, OUTPUT);
+pinMode(echoPin, INPUT);
+pinMode(ledPin, OUTPUT);
+Serial.begin(9600);
+}
+void loop() {
+// Clear the trigPin
+digitalWrite(trigPin, LOW);
+delayMicroseconds(2);
+// Send the trigger pulse
+digitalWrite(trigPin, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigPin, LOW);
+// Read the echo time
+duration = pulseIn(echoPin, HIGH);
+// Calculate the distance in cm
+distance = duration * 0.034 / 2;
+Serial.print("Distance: ");
+Serial.print(distance);
+Serial.println(" cm");
+// If obstacle is within 15 cm, turn on the LED
+if (distance < 15) {
+digitalWrite(ledPin, HIGH); // Obstacle detected
+} else {
+digitalWrite(ledPin, LOW); // No obstacle
+}
+delay(2000);
+}
