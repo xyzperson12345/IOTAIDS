@@ -21,3 +21,67 @@ void loop() {
     Serial.println("Enter another number to square:");
   }
 }
+Explanation (Simple Practical)
+
+Connections:
+
+No external components needed.
+
+Just connect the Arduino to your PC using a USB cable.
+
+Open Serial Monitor from Arduino IDE.
+
+
+
+---
+
+Working:
+
+1. Serial.begin(9600):
+
+Starts communication with your PC.
+
+
+
+2. Serial.println("Enter the number..."):
+
+Shows a message asking for a number in the Serial Monitor.
+
+
+
+3. User Input:
+
+You type a number (like 5) in the Serial Monitor and press Enter.
+
+
+
+4. Arduino reads number:
+
+Serial.parseInt() takes the number you typed.
+
+
+
+5. Square Calculation:
+
+Arduino multiplies the number with itself.
+
+
+
+6. Result:
+
+It shows the square (e.g., 25) in the Serial Monitor.
+
+
+
+7. Repeats:
+
+You can keep entering numbers, and it keeps showing squares.
+
+
+
+
+
+---
+
+Would you like a simple flowchart or demo screenshot style diagram for this?
+
