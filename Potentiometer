@@ -1,0 +1,36 @@
+*
+L0--->10 PIN IN digital;
+gnd------> gnd;
+3v3------>5v;
+AIN----->a0;
+*/
+
+
+#define LED_PIN 10
+#define POT_PIN A0
+void setup() {
+Serial.begin(9600);
+pinMode( LED_PIN, OUTPUT);
+}
+void loop() {
+// reads the input on analog pin A0(value between 0 and 1023)
+int In_POT_Value=analogRead(POT_PIN);
+//scales it to brightness(value between 0 and 255)
+int Brightness=map(In_POT_Value, 0, 1023, 0, 255);
+//sets the brightness LED that connects to pin 3
+analogWrite(LED_PIN,Brightness);
+//print out the value
+if((In_POT_Value>=0 && In_POT_Value<=1023)||(Brightness>=0 && Brightness<=255))
+{
+Serial.print("POT Value:");
+Serial.print(In_POT_Value);
+Serial.print(",Brightness value:");
+Serial.print(Brightness);
+}
+else
+{
+Serial.println("Undefined value");
+}
+delay(500);
+Serial.println("******************************************");
+}
