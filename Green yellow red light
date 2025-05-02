@@ -59,3 +59,79 @@ delay(500);
 }
 }
 }
+
+Simple Explanation of Code and Working:
+
+LED Connections:
+
+Green LED (l3) → Pin 4
+
+Yellow LED (l2) → Pin 5
+
+Red LED (l1) → Pin 6
+
+All LED negative legs → resistor → GND
+
+
+
+---
+
+What the Code Does (Step-by-Step):
+
+1. Setup:
+
+Sets pin 4, 5, and 6 as outputs (for LEDs).
+
+
+
+2. Loop:
+
+Calls the changeLights() function again and again.
+
+
+
+3. Inside changeLights() function:
+
+A loop runs from i = 0 to 300 in steps of 20.
+
+Based on the value of i, it controls which LED blinks.
+
+
+
+4. LED Behavior Based on i:
+
+i = 0 to 100:
+
+Green LED blinks (ON 0.5s, OFF 0.5s)
+
+Yellow and Red stay OFF
+
+
+i = 101 to 199:
+
+Yellow LED blinks
+
+Green and Red OFF
+
+
+i = 200 to 300:
+
+Red LED blinks
+
+Green and Yellow OFF
+
+
+
+
+5. After this sequence, it repeats.
+
+
+
+
+---
+
+Summary (Very Simple):
+Green blinks first → Then Yellow blinks → Then Red blinks → Repeats like traffic signals.
+
+Would you like me to draw a diagram of this traffic light flow?
+
