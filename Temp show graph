@@ -23,3 +23,61 @@ void loop() {
   Serial.println();
   delay(1000);
 }
+Connections:
+
+
+---
+
+Explanation (Simple Practical):
+
+1. LM35 Sensor:
+
+LM35 gives analog output proportional to the temperature.
+
+For every 1°C, it gives 10 mV.
+
+
+
+2. Arduino Reads Temperature:
+
+analogRead(A4) reads the voltage from the LM35.
+
+It returns a value between 0 and 1023, corresponding to 0 to 5V.
+
+
+
+3. Formula:
+
+The formula used to calculate temperature from the analog value is:
+
+temp = (5.00 * analogRead(A4) * 100) / 1024.0;
+
+5.00 corresponds to the 5V reference voltage.
+
+100 converts the mV to degrees Celsius (since 1°C = 10mV).
+
+1024.0 is the ADC resolution (1024 steps for 10-bit ADC).
+
+
+
+4. Output:
+
+It prints the temperature value in Celsius to the Serial Monitor every 1 second.
+
+
+
+
+
+---
+
+Note:
+
+You have a small error in the code, as you are reading from A4 (incorrect pin), but you mentioned using A0 for the LM35 in your connections. Update it to:
+
+
+temp = (5.00 * analogRead(A0) * 100) / 1024.0;
+
+This will ensure the correct pin is read for temperature data.
+
+Would you like further clarification or additional assistance with the code?
+
