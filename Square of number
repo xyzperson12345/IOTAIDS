@@ -1,0 +1,23 @@
+*
+dirct conenct the usb cable in board
+*/
+
+
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Enter the number to be squared:");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    int num = Serial.parseInt();
+    int squared = num * num;
+
+    Serial.print("Square of ");
+    Serial.print(num);
+    Serial.print(" is ");
+    Serial.println(squared);
+    Serial.println("Enter another number to square:");
+  }
+}
