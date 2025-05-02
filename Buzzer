@@ -1,0 +1,40 @@
+/*
+5v----->5v;
+buz----->8(digital pin)
+gnd---->gnd;
+*/
+
+
+
+
+
+const int knockSensor = A0; //pin for the knock sensor
+const int buzzer=8;
+const int threshold = 100;
+void setup() {
+pinMode(knockSensor , INPUT);
+pinMode(buzzer,OUTPUT);
+Serial.begin(9600);
+}
+void loop() {
+int sensorValue = analogRead(knockSensor);
+Serial.println(sensorValue);
+if(sensorValue > threshold)
+{
+playTune();
+}
+delay(100);
+}
+void playTune()
+{
+int melody[]={262,294,330,349,392,440,494,523};
+int noteDurations[]={4,4,4,4,4,4,4,4};
+for(int thisNote=0; thisNote<8 ; thisNote++)
+{
+int noteDuration= 1000 / noteDurations[thisNote];
+tone(buzzer , melody[thisNote] , noteDuration);
+int pauseBetweenNotes = noteDuration * 1.30;
+delay(pauseBetweenNotes);
+noTone(buzzer);
+}
+}
