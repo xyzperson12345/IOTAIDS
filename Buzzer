@@ -38,3 +38,38 @@ delay(pauseBetweenNotes);
 noTone(buzzer);
 }
 }
+
+Connections (Simple):
+
+Knock Sensor
+
+VCC → 5V
+
+GND → GND
+
+OUT → A0
+
+
+Buzzer
+
+→ Pin 8
+
+
+– → GND
+
+
+
+
+---
+
+Working (Simple):
+
+Knock sensor detects a tap or knock.
+
+If knock is strong (value > 100), buzzer plays a melody.
+
+Sensor keeps checking every 100 ms.
+
+
+Want a simple block diagram for this?
+
