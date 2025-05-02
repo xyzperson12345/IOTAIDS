@@ -44,3 +44,45 @@ digitalWrite(ledPin, LOW); // No obstacle
 }
 delay(2000);
 }
+
+
+Connections (Simple):
+
+Ultrasonic Sensor
+
+VCC → 5V
+
+GND → GND
+
+TRIG → Pin 9
+
+ECHO → Pin 10
+
+
+LED (l1)
+
+→ Pin 3
+
+
+– → GND (via resistor)
+
+
+
+
+---
+
+Working (Simple):
+
+Sensor sends sound wave using TRIG.
+
+Measures time to receive it back using ECHO.
+
+Calculates distance.
+
+If something is closer than 15 cm, LED turns ON.
+
+Else, LED stays OFF.
+
+
+Want a labeled diagram for this setup?
+
