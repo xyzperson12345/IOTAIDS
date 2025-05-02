@@ -34,3 +34,49 @@ Serial.println("Undefined value");
 delay(500);
 Serial.println("******************************************");
 }
+
+Connections:
+
+LED GND pin (shorter leg) connected to GND via a resistor (220Ω or 330Ω).
+
+Potentiometer: One side to 5V, other side to GND, middle pin to A0.
+
+
+
+---
+
+Explanation (Practical Working in Simple Words):
+
+1. Potentiometer controls brightness:
+
+As you rotate the knob, voltage on A0 changes (0 to 5V).
+
+Arduino reads this using analogRead(A0) which gives values from 0 to 1023.
+
+
+
+2. LED Brightness Control:
+
+Arduino maps this value to 0–255 using map() function.
+
+This value is sent to pin 10 using analogWrite(), which controls the LED brightness using PWM (Pulse Width Modulation).
+
+
+
+3. Serial Monitor Output:
+
+Every 0.5 seconds, it prints:
+
+POT value (0–1023)
+
+Brightness (0–255)
+
+
+
+
+
+
+---
+
+Would you like a simple diagram to understand the wiring?
+
