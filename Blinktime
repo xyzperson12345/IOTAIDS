@@ -38,3 +38,26 @@ void loop() {
 }
 
 
+Simple Connections:
+
+LED1 → Pin 13
+
+LED2 → Pin 12
+
+LED3 → Pin 11
+
+LED4 → Pin 10
+(Use resistor from LED to GND)
+
+
+Simple Working:
+
+Each LED turns ON for 1 second, then OFF.
+
+LEDs blink one by one from Pin 13 to Pin 10.
+
+Keeps repeating.
+
+
+Want a simple circuit diagram image?
+
