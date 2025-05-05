@@ -1,0 +1,182 @@
+#include<iostream> 
+#define max 20 
+using namespace std; 
+class array 
+{ 
+ public: 
+ int i,j,n,leftI,rightI,largeI,smallestI,A[max],B[max],temp; 
+ void read() 
+ { 
+     cout<<"\n Enter the total no.of student:"; 
+  cin>>n; 
+  cout<<"\n enter the marks:"; 
+  for(i=0;i<n;i++) 
+     { 
+      cin>>A[i]; 
+      B[i]=A[i]; 
+  } 
+ } 
+ void maximum() 
+ { 
+  for(j=n/2-1;j>=0;j--)  
+  { 
+   i=j; 
+      while(1) 
+      { 
+       largeI=i; 
+          leftI=2*i+1; 
+          rightI=2*i+2; 
+         if(leftI<n && A[largeI]<A[leftI]) 
+         { 
+           largeI=leftI; 
+         } 
+         if(rightI<n && A[largeI]<A[rightI]) 
+          { 
+           largeI=rightI; 
+          }    
+          if(largeI!=i) 
+          { 
+           temp=A[i]; 
+           A[i]=A[largeI]; 
+           A[largeI]=temp; 
+           i=largeI; 
+          } 
+          else 
+          { 
+           break; 
+    } 
+         } 
+  } 
+  cout<<"\n maximum heap:"; 
+  for(j=0;j<n;j++) 
+  { 
+   cout<<A[j]<<" "; 
+  } 
+     cout<<"\n Maximum Marks:"<<A[0];  
+   } 
+   void minimum() 
+ { 
+  for(j=n/2-1;j>=0;j--)  
+     { 
+      i=j; 
+      while(1) 
+      { 
+       smallestI=i; 
+          leftI=2*i+1; 
+          rightI=2*i+2; 
+         if(leftI<n && B[smallestI]>B[leftI]) 
+         { 
+           smallestI=leftI; 
+         } 
+         if(rightI<n && B[smallestI]>B[rightI]) 
+          { 
+           smallestI=rightI; 
+          }    
+          if(smallestI!=i) 
+          { 
+           temp=B[i]; 
+           B[i]=B[smallestI]; 
+           B[smallestI]=temp; 
+           i=smallestI; 
+          } 
+          else 
+          { 
+           break; 
+    } 
+         }                                         
+  } 
+  cout<<"\n Minimum heap:"; 
+  for(j=0;j<n;j++) 
+  { 
+   cout<<B[j]<<" "; 
+  } 
+     cout<<"\n Minimum Marks:"<<B[0];  
+} 
+}; 
+int main() 
+{ 
+} 
+array a; 
+a.read(); 
+a.maximum(); 
+a.minimum(); 
+return 0; 
+Output: 
+Enter the total no.of student:6 
+enter the marks:8 
+10 
+3 
+5 
+15 
+30 
+maximum heap:30 15 8 5 10 3 
+Maximum Marks:30 
+Minimum heap:3 5 8 10 15 30 
+Minimum Marks:3 Explanation:
+This C++ program uses a heap sort algorithm to arrange the students' marks in both maximum heap and minimum heap formats. It allows us to determine the highest and lowest marks from a list of students, and the heaps are built using the properties of binary heaps.
+Key Concepts:
+Max Heap:
+A max-heap is a binary tree where the parent node is always greater than or equal to its child nodes. The maximum element is always at the root of the heap.
+The program converts the list of marks into a max-heap, where the largest value (maximum marks) will be at the root (top of the heap).
+Min Heap:
+A min-heap is a binary tree where the parent node is always less than or equal to its child nodes. The minimum element is always at the root of the heap.
+The program converts the list of marks into a min-heap, where the smallest value (minimum marks) will be at the root.
+Class and Functions:
+Class array:
+Variables:
+A[max]: Array to hold the original marks.
+B[max]: Array to hold a copy of the marks, used to build the minimum heap.
+Other variables are used to handle the heap operations (leftI, rightI, largeI, smallestI, etc.).
+Functions:
+read():
+Accepts the number of students and their respective marks. It stores these marks in the array A[] and copies them to array B[] for use in the minimum heap function.
+maximum():
+Converts the marks array A[] into a max-heap. It performs heapification starting from the non-leaf nodes (half of the array) and ensures the max-heap property (parent node greater than children).
+It outputs the maximum marks from the root node of the max-heap.
+minimum():
+Converts the marks array B[] into a min-heap. It performs a similar heapification process to ensure the min-heap property (parent node smaller than children).
+It outputs the minimum marks from the root node of the min-heap.
+Program Flow:
+Input:
+The program first asks the user for the total number of students and then takes the marks for each student as input.
+Heapification:
+After collecting the marks, the program proceeds to build a max heap from array A[] and a min heap from array B[].
+Output:
+After heapification:
+The maximum heap is printed with the marks arranged in descending order.
+The minimum heap is printed with the marks arranged in ascending order.
+The maximum marks and minimum marks are displayed (the root elements of the respective heaps).
+Output Example:
+yaml
+Copy
+Edit
+Enter the total no.of student: 6
+Enter the marks: 
+8 
+10 
+3 
+5 
+15 
+30 
+Maximum heap: 30 15 8 5 10 3 
+Maximum Marks: 30
+Minimum heap: 3 5 8 10 15 30 
+Minimum Marks: 3
+Explanation of Output:
+Maximum Heap:
+The maximum() function rearranges the marks in descending order (max-heap property).
+The highest mark is 30, which is displayed as the Maximum Marks.
+Minimum Heap:
+The minimum() function rearranges the marks in ascending order (min-heap property).
+The lowest mark is 3, which is displayed as the Minimum Marks.
+Key Points to Note:
+Heapify Process: This process rearranges the elements in the array to maintain the heap properties.
+Time Complexity: Building a heap takes O(n) time, and finding the maximum or minimum element is O(1).
+
+
+
+
+
+
+
+
