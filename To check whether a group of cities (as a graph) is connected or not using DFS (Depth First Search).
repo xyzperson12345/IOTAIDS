@@ -1,0 +1,151 @@
+#include<iostream> 
+using namespace std; 
+class City  
+{ 
+public: 
+    int n,i,j,c,t; 
+    int M[50][50];  
+    int visited[10]; 
+    int count=0; 
+ 
+    void read() 
+ { 
+        cout<<"\n Enter the total number of cities: "; 
+        cin>>n; 
+        for(i=0;i<n;i++)  
+  { 
+            for(j=0;j<n;j++)  
+   { 
+                M[i][j]=0; 
+            } 
+        } 
+        cout<<"\n Enter the number of flight exit between cities: "; 
+        cin>>c; 
+        for(i=0;i<c;i++)  
+  { 
+            int x,y; 
+            cout<<"\n Enter the source cities and destination cities: "; 
+            cin>>x>>y; 
+            cout<<"\n Enter the time required between city " << x << " and city " << y << ": "; 
+            cin>>t; 
+            M[x][y]=t;   
+            M[y][x]=t;   
+        } 
+    } 
+ 
+    void display()  
+ { 
+        cout<<"\n Matrix representing time between cities:\n"; 
+        for(i=0;i<n;i++)  
+  { 
+            for (j=0;j<n;j++)  
+   { 
+                cout<<M[i][j]<< " "; 
+            } 
+            cout<<endl; 
+        } 
+    } 
+    void DFS(int u) 
+    { 
+     for(int v=0;v<n;v++) 
+     { 
+      if (visited[v]==0 && M[u][v]!=0) 
+      { 
+       count++; 
+       visited[v]=1; 
+       DFS(v); 
+   } 
+  } 
+ } 
+}; 
+ 
+int main()  
+{ 
+City ob; 
+ob.read(); 
+ob.display(); 
+for(int i=0;i<10;i++) 
+{ 
+ob.visited[i]=0; 
+} 
+ob.DFS(0); 
+if(ob.count==ob.n) 
+{ 
+} 
+else 
+{ 
+} 
+return 0; 
+} 
+OUTPUT: 
+cout<<"\n graph is connected"; 
+cout<<"\n graph is not connected"; 
+Enter the total number of cities: 3 
+Enter the number of flight exit between cities: 2 
+Enter the source cities and destination cities: 0 1 
+Enter the time required between city 0 and city 1: 8 
+Enter the source cities and destination cities: 1 2 
+Enter the time required between city 1 and city 2: 9 
+Matrix representing time between cities: 
+0 8 0 
+8 0 9 
+0 9 0 
+graph is connected  Step-by-Step Explanation:
+Class City:
+
+Contains variables for number of cities (n), flights (c), time matrix M, and visited array.
+
+count keeps track of how many cities were visited during DFS.
+
+Function read():
+
+Takes input for total cities and flight connections.
+
+Initializes the adjacency matrix M[i][j] = 0.
+
+Takes input for city pairs and time, and fills the matrix (M[x][y] = time and M[y][x] = time).
+
+Function display():
+
+Prints the time matrix showing how much time it takes between any two cities.
+
+Function DFS(int u):
+
+Performs Depth First Search from city u.
+
+If a city is not visited and connected, it marks it as visited and recursively visits its neighbors.
+
+Increments the count for each new city visited.
+
+main() function:
+
+Creates a City object.
+
+Calls read() and display() functions.
+
+Initializes all cities as unvisited.
+
+Calls DFS starting from city 0.
+
+If count == total cities, all cities are connected → graph is connected.
+
+Otherwise, the graph is not connected.
+
+Sample Output:
+
+sql
+Copy
+Edit
+Enter the total number of cities: 3
+Enter the number of flight exit between cities: 2
+Enter the source cities and destination cities: 0 1
+Enter the time required between city 0 and city 1: 8
+Enter the source cities and destination cities: 1 2
+Enter the time required between city 1 and city 2: 9
+
+Matrix representing time between cities:
+0 8 0 
+8 0 9 
+0 9 0 
+
+graph is connected
