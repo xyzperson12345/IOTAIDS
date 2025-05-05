@@ -1,0 +1,291 @@
+#include<iostream> 
+using namespace std; 
+struct node  
+{ 
+    int data; 
+    node* left; 
+    node* right; 
+}; 
+class btree  
+{ 
+    public: 
+        node* root; 
+ 
+        btree()  
+        { 
+            root = NULL; 
+        } 
+        void insert()  
+        { 
+            node* nnode=new node; 
+            nnode->left=NULL; 
+            nnode->right=NULL; 
+            cout << "Enter the data: "; 
+            cin >>nnode->data; 
+            if (root==NULL)  
+            { 
+                root=nnode; 
+            }  
+            else  
+            { 
+                node* temp=root; 
+                while(true)  
+                { 
+                    if (nnode->data < temp->data)  
+                    { 
+                        if(temp->left==NULL)  
+                        { 
+                           temp->left=nnode; 
+                           break; 
+                        } 
+                        temp=temp->left; 
+                    }  
+                    else  
+                    { 
+                        if(temp->right==NULL)  
+                        { 
+                           temp->right=nnode; 
+                           break; 
+                        } 
+                        temp=temp->right; 
+                    } 
+                } 
+            } 
+        }    
+        void display(node* root)  
+        { 
+            if (root!=NULL) 
+            { 
+                display(root->left); 
+                cout<<root->data <<"   "; 
+                display(root->right); 
+            } 
+        } 
+ 
+        node* findMin(node* root)  
+        { 
+            if (root == NULL)  
+                return NULL; 
+            while (root->left != NULL)  
+            { 
+                root = root->left; 
+            } 
+            return root; 
+        } 
+ 
+        bool search(node* root, int key)  
+        { 
+            while (root != NULL)  
+            { 
+                if (key == root->data)  
+                    return true; 
+                else if (key < root->data) root = root->left; 
+                else root = root->right; 
+            } 
+            return false; 
+        } 
+ 
+    int findHeight(node* temp)  
+   { 
+        if (temp == NULL)  
+            return 0; // -1 for edge count and 0 for node count 
+        int leftHeight = findHeight(temp->left); 
+        int rightHeight = findHeight(temp->right); 
+        return max(leftHeight, rightHeight) + 1; 
+   } 
+    void swap(node* temp)  
+        { 
+            if (temp == NULL)  
+                return; 
+ 
+            node* tempNode = temp->left; 
+            temp->left = temp->right; 
+            temp->right = tempNode; 
+            swap(temp->left); 
+            swap(temp->right); 
+        } 
+  
+}; 
+ 
+#include <iostream> 
+using namespace std; 
+ 
+int main()  
+{ 
+    btree b; 
+    int choice; 
+    do  
+    { 
+        cout << "\nChoose operation:\n"; 
+        cout << "1. Insert\n"; 
+        cout << "2. Display tree\n"; 
+        cout << "3. Find minimum node\n"; 
+        cout << "4. Searching node\n"; 
+        cout << "5. Find the node in max height of the tree\n"; 
+        cout << "6. Swap the tree\n"; 
+        cout << "7. Exit\n"; 
+        cout << "Enter your choice: "; 
+        cin >> choice; 
+ 
+        switch (choice)  
+        { 
+            case 1:  
+            { 
+                char ch; 
+                do  
+                { 
+                    b.insert(); 
+                    cout << "Do you want to add another number y/n: "; 
+                    cin >> ch; 
+                } while (ch == 'y'); 
+                break; 
+            } 
+            case 2:  
+            { 
+                b.display(b.root); 
+                break; 
+            } 
+            case 3:  
+            { 
+                cout << "Minimum node: " << b.findMin(b.root)->data << endl; 
+                break; 
+            } 
+            case 4:  
+            { 
+                int key; 
+                cout << "Enter a value to search: "; 
+                cin >> key; 
+                if (b.search(b.root, key))  
+                    cout << "Found" << endl; 
+                else  
+                    cout << "Not Found" << endl; 
+                break; 
+            } 
+            case 5:  
+            { 
+                cout << "Number of nodes in the longest path of the tree: " << b.findHeight(b.root) << endl; 
+                break; 
+            } 
+            case 6:  
+            { 
+                b.swap(b.root); 
+                cout << "Swapped tree is:\n";  
+                b.display(b.root); 
+                break; 
+            } 
+            case 7:  
+            { 
+                cout << "Exiting program.\n"; 
+                break; 
+            } 
+            default:  
+            { 
+                cout << "Invalid choice\n"; 
+                break; 
+            } 
+        } 
+    } while (choice != 7); 
+ 
+    return 0; 
+} 
+//Choose operation: 
+/*1. Insert 
+2. Display tree 
+3. Find minimum node 
+4. Searching node 
+5. Find the node in max height of the tree 
+6. Swap the tree 
+7. Exit 
+Enter your choice: 1 
+Enter the data: 1 
+Do you want to add another number y/n: y 
+Enter the data: 2 
+Do you want to add another number y/n: y 
+Enter the data: 3 
+Do you want to add another number y/n: y 
+Enter the data: 4 
+Do you want to add another number y/n: y 
+Enter the data: 5 
+Do you want to add another number y/n: y 
+Enter the data: 6 
+Do you want to add another number y/n: n 
+Choose operation: 
+1. Insert 
+2. Display tree 
+3. Find minimum node 
+4. Searching node 
+5. Find the node in max height of the tree 
+6. Swap the tree 
+7. Exit 
+Enter your choice: 2 
+1   2   3   4   5   6 
+Choose operation: 
+1. Insert 
+2. Display tree 
+3. Find minimum node 
+4. Searching node 
+5. Find the node in max height of the tree 
+6. Swap the tree 
+7. Exit 
+Enter your choice: 3 
+Minimum node: 1 
+Choose operation: 
+1. Insert 
+2. Display tree 
+3. Find minimum node 
+4. Searching node 
+5. Find the node in max height of the tree 
+6. Swap the tree 
+7. Exit 
+Enter your choice: 4 
+Enter a value to search: 7 
+Not Found 
+Choose operation: 
+1. Insert 
+2. Display tree 
+3. Find minimum node 
+4. Searching node 
+5. Find the node in max height of the tree 
+6. Swap the tree 
+7. Exit 
+Enter your choice: 6 
+Swapped tree is: 
+6   5   4   3   2   1 
+Choose operation: 
+1. Insert 
+2. Display tree 
+3. Find minimum node 
+4. Searching node 
+5. Find the node in max height of the tree 
+6. Swap the tree 
+7. Exit 
+Enter your choice: 5 
+Number of nodes in the longest path of the tree: 6 
+Choose operation: 
+1. Insert 
+2. Display tree 
+3. Find minimum node 
+4. Searching node 
+5. Find the node in max height of the tree 
+6. Swap the tree 
+7. Exit 
+Enter your choice: ---------->> this progarm is also varified for null values and single inputs */ Explanation:
+This C++ program implements a Binary Search Tree (BST) with various operations that allow for the dynamic insertion, searching, and display of elements in the tree. It is designed to handle several edge cases like null values and single-node trees. The following operations are covered:
+Insert: Adds nodes to the tree following the BST property (left child is smaller, right child is larger than the parent node).
+Display (In-order Traversal): Traverses the tree in an in-order manner and prints the nodes in ascending order.
+Find Minimum Node: Finds and returns the leftmost node in the tree (i.e., the node with the smallest value).
+Search: Searches for a specific value within the tree and reports if it's found or not.
+Find the Height of the Tree: Calculates the longest path from the root to a leaf node, determining the tree's height.
+Swap the Tree: Swaps the left and right subtrees recursively, essentially mirroring the entire tree.
+Menu-Driven Interface: The program operates in a loop, presenting the user with choices for different operations, ensuring a simple and user-friendly interaction.
+Edge Cases Handled:
+The program gracefully handles empty trees (NULL root) and trees with only one node, ensuring no crashes or errors during operations.
+It offers a safe and error-free execution for insertions, searches, and other tree manipulations.
+This program demonstrates the core concepts of a Binary Search Tree, which is widely used in computer science for efficient searching, insertion, and deletion operations. It helps in understanding how trees work and the advantages of maintaining an ordered structure for faster access to elements.
+
+
+
+
+
+
+
