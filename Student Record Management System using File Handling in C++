@@ -1,0 +1,222 @@
+#include<iostream> 
+#include<fstream> 
+using namespace std; 
+class student 
+{ 
+    public: 
+    int roll; 
+    char div; 
+    char  name[20],add[20]; 
+    void read() 
+    { 
+        cout<<"\n enter the name of student:"; 
+        cin>>name; 
+        cout<<"\n enter the roll no:"; 
+        cin>>roll; 
+        cout<<"\n enter the div:"; 
+        cin>>div; 
+        cout<<"\n enter the address :"; 
+        cin>>add; 
+    } 
+    void display() 
+    { 
+        cout<<"\n Name:"<<name; 
+        cout<<"\n Roll no:"<<roll; 
+        cout<<"\n Division:"<<div; 
+        cout<<"\n Address:"<<add; 
+    } 
+}; 
+int main() 
+{ 
+    student s; 
+ ofstream fout,temp; 
+    ifstream fin; 
+ char choice; 
+ int ch,a,n,i; 
+    int flag; 
+ do 
+ {   cout<<"\n 1.Write data \n 2.append data \n 3.read data \n 4.search data \n 5.deletion 
+of data"; 
+  cout<<"\n Enter the your choice"; 
+  cin>>ch; 
+  switch(ch) 
+  { 
+   case 1: fout.open("student.txt", ios::out);  
+                cout << "Enter the number of student data you want to write: "; 
+                cin >> n; 
+                for (i = 0; i < n; i++)  
+    { 
+                    s.read(); 
+                    fout.write((char*)&s, sizeof(s)); 
+                     
+                } 
+                fout.close(); 
+                break; 
+     
+   case 2:fout.open("student.txt", ios::app);  
+                    s.read(); 
+                    fout.write((char*)&s, sizeof(s)); 
+                             
+        fout.close(); 
+                    break; 
+   case 3: cout << "\n Reading data from file:\n"; 
+                fin.open("student.txt"); 
+                while (fin.read((char*)&s, sizeof(s))) 
+                { 
+        s.display(); 
+                } 
+                fin.close(); 
+                break; 
+      
+   case 4:  
+       cout<<"\n Enter  rollno to search"; 
+       cin>>a; 
+                flag=0; 
+                fin.open("student.txt"); 
+                while (fin) 
+                { 
+                 fin.read((char*)&s, sizeof(s)); 
+                 if(s.roll==a) 
+                 { 
+     cout<<"\n student rollno. found"; 
+        s.display(); 
+        flag=1; 
+        break; 
+       } 
+                } 
+                if(flag==0) 
+                { 
+                   cout<<"\n student does not exists"; 
+                } 
+                fin.close();     
+                break; 
+            case 5: cout<<"\n Enter the rollno to be deleted:"; 
+             cin>>n; 
+             flag=0; 
+          fin.open("student.txt",ios::in); 
+          temp.open("temp.txt",ios::out); 
+           while(fin.read((char*)&s,sizeof(s))) 
+             { 
+              if(s.roll==n) 
+              { 
+               cout<<n<<" is deleted successfully "; 
+               flag=1; 
+               continue; 
+     } 
+              temp.write((char*)&s,sizeof(s));  
+    } 
+    fin.close(); 
+    temp.close(); 
+    remove("student.txt"); 
+    rename("temp.txt","student.txt"); 
+    if(flag==0) 
+    { 
+     cout<<"\n Roll number does not exist"; 
+    } 
+    break; 
+           default: cout<<"\n Your choice is wrong"; 
+  } 
+  cout<<"\nDo you want to continue "; 
+  cin>>choice;    
+ } 
+ while(choice=='y'); 
+ return 0; 
+   
+} 
+Output: 
+1.Write data 
+2.append data 
+3.read data 
+4.search data 
+5.deletion of data 
+Enter the your choice1 
+Enter the number of student data you want to write: 1 
+enter the name of student:aaa 
+enter the roll no:2 
+enter the div:A 
+enter the address :dfg 
+Do you want to continue y 
+1.Write data 
+2.append data 
+3.read data 
+4.search data 
+5.deletion of data 
+Enter the your choice2 
+enter the name of student:bb 
+enter the roll no:3 
+enter the div:A 
+enter the address :wwe 
+Do you want to continue y 
+1.Write data 
+2.append data 
+3.read data 
+4.search data 
+5.deletion of data 
+Enter the your choice3 
+Reading data from file: 
+Name:aaa 
+Roll no:2 
+Division:A 
+Address:dfg 
+Name:bb 
+Roll no:3 
+Division:A 
+Address:wwe 
+Do you want to continue y 
+1.Write data 
+2.append data 
+3.read data 
+4.search data 
+5.deletion of data 
+Enter the your choice4 
+Enter  rollno to search3 
+student rollno. found 
+Name:bb 
+Roll no:3 
+Division:A 
+Address:wwe 
+Do you want to continue y 
+1.Write data 
+2.append data 
+3.read data 
+4.search data 
+5.deletion of data 
+Enter the your choice5 
+Enter the rollno to be deleted:2 
+2 is deleted successfully 
+Do you want to continue y 
+1.Write data 
+2.append data 
+3.read data 
+4.search data 
+5.deletion of data 
+Enter the your choice3 
+Reading data from file: 
+Name:bb 
+Roll no:3 
+Division:A 
+Address:wwe 
+Do you want to continue n Explanation (Simple and Short):
+This C++ program manages student records using file handling. It allows you to:
+
+Write student data to a file.
+
+Append new student records.
+
+Read and display all student records.
+
+Search a student by roll number.
+
+Delete a student record by roll number.
+
+🔹 Key Concepts Used:
+Classes & Objects: To manage student data (name, roll, div, address)
+
+File Handling: Uses ofstream, ifstream, and binary file operations.
+
+Switch-case Menu: For easy user interaction.
+
+🔹 Files Used:
+student.txt → Stores all student records.
+
+temp.txt → Used temporarily during deletion.
