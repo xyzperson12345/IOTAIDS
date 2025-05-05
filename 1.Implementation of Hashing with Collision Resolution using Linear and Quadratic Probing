@@ -1,0 +1,204 @@
+#include <iostream>
+using namespace std;
+
+struct telephone
+{
+	string name;
+	int no;
+};
+
+class hashing
+{
+	string x;
+	int k, sum, j;
+	int i, ind, c;
+	
+	public:
+		void read(telephone a[5]);
+		void display(telephone a[], int n);
+		void cal_ascii(telephone a[5], int s[5]);
+		void quadprob(telephone a[5], telephone res[10], int s[5]);
+		void linprob(telephone a[5], telephone res[10], int s[5]);
+};
+
+void hashing :: read(telephone a[5])
+{
+	cout<<"Enter contact details: \n";
+	for (i = 0; i<5; i++)
+	{
+		cout<<"Name: ";
+		cin>>a[i].name;
+		cout<<"Number: ";
+		cin>>a[i].no;
+	}
+}
+
+void hashing :: display(telephone a[], int n)
+{
+	cout<<"Name\t\tTelephone No\n";
+	for(i = 0; i<n; i++)
+	{
+		cout<<a[i].name<<"\t\t"<<a[i].no<<endl;
+	}
+}
+
+void hashing :: cal_ascii(telephone a[5], int s[5])
+{
+	cout<<"\nElement\t\tASCII Value\n";
+	for(i = 0; i<5; i++)
+	{
+		sum = 0;
+		x = a[i].name;
+		j = 0;
+		while(x[j] != '\0')
+		{
+			sum += x[j];
+			j++;
+		}
+		s[i] = sum%5;
+		cout<<a[i].name<<"\t\t"<<sum<<endl;
+	}
+}
+
+void hashing :: quadprob(telephone a[5], telephone res[10], int s[5])
+{
+	for(i=0; i<5; i++)
+	{
+        c = 0;
+		ind = s[i];
+		if(res[ind].name == "none")
+		{
+            cout<<"for "<<a[i].name<<endl;
+			res[ind].name = a[i].name;
+			res[ind].no = a[i].no;
+		}
+		else
+		{
+			k = 1;
+			j = ind;
+			cout<<"\nCollision for "<<a[i].name<<endl;
+			while(res[j].name != "none")
+			{
+				j = (j+k*k)%10;
+				k++;
+                c++;
+			}
+			res[j].name = a[i].name;
+			res[j].no = a[i].no;
+		}
+        cout<<"Total Collision: "<<c<<endl;
+	}
+}
+
+void hashing :: linprob(telephone a[5], telephone res[10], int s[5])
+{
+	for(i=0; i<5; i++)
+	{
+        c = 0;
+		ind = s[i];
+		if(res[ind].name == "none")
+		{
+            cout<<"for "<<a[i].name<<endl;
+			res[ind].name = a[i].name;
+			res[ind].no = a[i].no;
+		}
+		else
+		{
+			j = (ind+1)%10;
+			c++;
+			cout<<"\nCollision for "<<a[i].name<<endl;
+			while(res[j].name != "none")
+			{
+				j = (j+1)%10;
+                c++;
+			}
+			res[j].name = a[i].name;
+			res[j].no = a[i].no;
+		}
+        cout<<"Total Collision: "<<c<<endl;
+	}
+}
+
+int main()
+{
+	hashing obj;
+	int i, s[5];
+	telephone a[5], res[10];
+	telephone res2[10];
+	
+	//Reading the records
+	obj.read(a);
+	
+	//Displaying the Records
+	cout<<"\n\nElements of array are: \n\n";
+	obj.display(a, 5);
+	
+	//Calculation of ASCII values of strings
+	cout<<"\nAscii Values of elements are: \n";
+	obj.cal_ascii(a, s);
+	
+	//Calculation of Hash Value
+	cout<<"\nAscii % 10: \n";
+	for (i= 0; i<5;i++)
+	{
+		cout<<s[i]<<"\t";
+	}
+	
+	//Intialization of Telephone book
+	for(i=0; i<10; i++)
+	{
+		res[i].name = "none";
+		res[i].no = '\0';
+		res2[i].name = "none";
+		res2[i].no = '\0';
+	}
+	
+	cout<<"\n\nEmpty Records are: \n\n";
+	obj.display(res2, 10);
+	
+	cout<<"\n\nLinear Probing: \n";
+	obj.linprob(a, res2, s);    //Linear Probing
+	obj.display(res2, 10);
+	
+	//Displaying empty records
+	cout<<"\n\nEmpty Records are: \n\n";
+	obj.display(res, 10);
+	
+	cout<<"\n\nQuadratic Probing: \n";
+	obj.quadprob(a, res, s);    //Quadratic Probing
+	obj.display(res, 10);
+	return 0;
+}
+Description:
+This C++ program stores contact details (name and phone number) using hashing. It handles collisions using two different techniques:
+Linear Probing
+Quadratic Probing
+📌 Key Concepts:
+Hash Function: ASCII sum of characters in the name % 5
+Collision: When two names hash to the same index
+Resolution: Alternate index search using linear or quadratic probing
+🔧 Functional Highlights:
+read() – Takes 5 contact inputs
+cal_ascii() – Calculates ASCII sum and hash value
+linprob() – Inserts using linear probing
+quadprob() – Inserts using quadratic probing
+display() – Displays stored contacts
+Do you want a flowchart or diagram of how probing works?
+You said:
+WHAT IS LINEAR AND QUADRATIC 
+ChatGPT said:
+Here’s a simple explanation:
+🔹 Linear Probing:
+If a collision occurs, check the next slot (index + 1, then +2, and so on).
+Keep moving one step ahead until an empty slot is found.
+Example:
+If hash index is 3 and it’s full, try 4 → 5 → 6...
+🔹 Quadratic Probing:
+If a collision occurs, check slots using square increments (index + 1², +2², +3²...).
+This spreads out the checks more widely.
+Example:
+If hash index is 3 and it’s full, try 4 (3+1²) → 7 (3+2²) → 2 (3+3² % 10)...
+⚠️ Difference:
+Feature	Linear Probing	Quadratic ProbingStep pattern	+1, +2, +3...	+1², +2², +3²...
+Clustering	More (primary)	Less (secondary)
+Simplicity	Easy	Slightly complex
