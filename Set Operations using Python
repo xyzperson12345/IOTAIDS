@@ -1,0 +1,146 @@
+A=[] 
+a=int(input("\n Enter the total number of elemnts for set A:")) 
+for i in range(a): 
+    r=int(input("Enter the elements:")) 
+    A.append(r) 
+     
+B=[] 
+b=int(input("Enter the total number of elements for set B:")) 
+for i in range(b): 
+    r=int(input("Enter the elements:")) 
+    B.append(r) 
+     
+def add(): 
+    r1=int(input("Enter the new element you want to add:")) 
+    A.append(r1) 
+    print("Add = ",A) 
+     
+def remove_(): 
+    h=int(input("Enter the element you want to remove:")) 
+    A.remove(h) 
+    print(A) 
+ 
+def search(): 
+    s=int(input("Enter element u want to search:")) 
+    for i in range(a): 
+        f=0 
+        if(A[i]==s): 
+            f=1 
+            break 
+    if(f==1): 
+        print("Element is found") 
+    else: 
+        print("Element is not found") 
+  
+def size(): 
+    print("Size of set A: ", len(A)) 
+    print("Size of set B: ", len(B)) 
+     
+ 
+def intersection(A,B): 
+    I=[] 
+    for i in range(len(A)): 
+        for j in range(len(B)): 
+            if(A[i]==B[j]): 
+             I.append(A[i]) 
+    print("Intersection = ",I) 
+             
+def union(A,B): 
+    U=[] 
+    for i in range(len(A)): 
+        U.append(A[i]) 
+        for j in range(len(B)): 
+            f=0 
+            if(B[j]==A[i]): 
+             f=1 
+            break 
+        if(f==0): 
+            U.append(B[j]) 
+    print("Union = ",U) 
+         
+def diff(A,B): 
+    D=[] 
+    for i in range(len(A)): 
+        f=0 
+        for j in range(len(B)): 
+            if(A[i]==B[j]): 
+             f=1  
+             break 
+        if(f==0): 
+         D.append(A[i]) 
+         print("Difference = ",D) 
+         
+         
+def subset(A, B): 
+     for i in range(len(A)): 
+         f=0 
+         if A[i] not in B: 
+            f=1 
+            print("A is not a subset of B") 
+            break 
+     if(f==0): 
+      print("A is a subset of B") 
+ 
+def display(): 
+ print("Set A= ",A) 
+ print("Set B=",B) 
+         
+print("1.Add\n2.Display\n3.Remove\n4.Size\n5.Intersection\n6.Union\n7.Difference\n8.S
+ ubset\n9.stop") 
+while(1): 
+ n=int(input("Enter ur choice:")) 
+ if(n==1): 
+  add() 
+  
+ elif(n==2): 
+  display() 
+  
+ elif(n==3): 
+  remove_() 
+  
+ elif(n==4): 
+     size() 
+      
+ elif(n==5): 
+  intersection(A, B) 
+  
+ elif(n==6): 
+  union(A, B) 
+  
+ elif(n==7): 
+  diff(A,B) 
+   
+ elif(n==8): 
+  subset(A, B) 
+   
+ elif(n==9): 
+  break; 
+  
+ else: 
+  print("\nWrong choice") 
+ 
+Here is a very simple point-wise explanation of the program:
+
+The user enters numbers for Set A and Set B.
+
+A menu is shown with options like add, remove, display, etc.
+
+Add – Adds a new number to Set A.
+
+Remove – Removes a number from Set A.
+
+Search – Checks if a number is present in Set A.
+
+Size – Shows how many elements are in Set A and Set B.
+
+Intersection – Shows common elements in both sets.
+
+Union – Combines Set A and B (may repeat elements due to a small mistake).
+
+Difference – Shows elements that are in A but not in B.
+
+Subset – Checks if all elements of A are present in B.
+
+Display – Shows the current values in Set A and Set B.
+
+The user can keep using options until they choose to stop.
